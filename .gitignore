@@ -28,3 +28,8 @@ google-services.json
 .vscode/
 *.class
 *.dex
+
+# Implementation / planning docs
+*implementation_plan*.md
+IMPLEMENTATION_PLAN*.md
+luna_v2_rich.html
