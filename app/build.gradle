@@ -1,0 +1,98 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+android {
+    namespace 'com.emergency.patient'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.emergency.patient"
+        minSdk 31
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [MAPS_API_KEY: project.findProperty('MAPS_API_KEY') ?: '']
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    
+    // Socket.IO
+    implementation 'io.socket:socket.io-client:2.1.0'
+
+    // ZXing — QR generation
+    implementation 'com.google.zxing:core:3.5.0'
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+
+    // Google Play Services — Location, Maps & Activity Recognition
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+
+    // Security — Encrypted storage
+    implementation 'androidx.security:security-crypto:1.1.0-alpha06'
+
+    // Networking — Retrofit + OkHttp
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
+
+    // Firebase (Using direct version instead of BOM to ensure maximum Gradle compatibility)
+    implementation 'com.google.firebase:firebase-messaging:23.4.0'
+    implementation 'com.google.firebase:firebase-auth:22.3.1'
+    implementation 'com.google.firebase:firebase-firestore:24.10.3'
+    
+    // Cloudinary for storage (Free, no credit card required)
+    implementation 'com.cloudinary:cloudinary-android:2.3.1'
+
+    // OSMDroid — Free native map
+    implementation 'org.osmdroid:osmdroid-android:6.1.18'
+
+    // Room Database
+    implementation 'androidx.room:room-runtime:2.6.1'
+    annotationProcessor 'androidx.room:room-compiler:2.6.1'
+
+    // WorkManager — background task scheduling
+    implementation 'androidx.work:work-runtime:2.9.0'
+
+    // PDF Extraction (Zero-Cost RAG)
+    implementation 'com.tom-roush:pdfbox-android:2.0.27.0'
+
+    // ML Kit Text Recognition (On-device OCR)
+    implementation 'com.google.mlkit:text-recognition:16.0.0'
+
+    // Tesseract OCR (Fallback offline OCR)
+    implementation 'com.rmtheis:tess-two:9.1.0'
+
+    // OpenCV Android (Official Maven Dependency)
+    implementation 'org.opencv:opencv:4.10.0'
+
+    // Google AI Edge (AICore) — On-device Gemini Nano
+    implementation "com.google.ai.edge.aicore:aicore:0.0.1-exp02"
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

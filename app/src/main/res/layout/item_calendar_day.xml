@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/calendarDayContainer"
+    android:layout_width="56dp"
+    android:layout_height="76dp"
+    android:layout_margin="6dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/color_divider"
+    app:cardBackgroundColor="@color/color_surface"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/dayNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mon"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:letterSpacing="0.1"
+            android:textColor="@color/color_text_secondary"/>
+
+        <TextView
+            android:id="@+id/dateNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="28"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_primary"
+            android:layout_marginTop="2dp"/>
+
+        <View
+            android:id="@+id/indicatorDot"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:background="@drawable/dot_indicator"
+            android:layout_marginTop="6dp"
+            android:backgroundTint="@color/color_primary_orange"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_background">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Header Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp">
+                
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Medication"
+                        android:textSize="28sp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textStyle="bold"
+                        android:textColor="@color/color_text_primary"/>
+
+                    <TextView
+                        android:id="@+id/monthYearText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="April 2024"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/color_primary_orange"
+                        android:textAllCaps="true"
+                        android:letterSpacing="0.1"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/settingsIcon"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/color_divider"
+                    app:cardBackgroundColor="@color/color_surface">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_nav_settings"
+                        android:padding="12dp"
+                        app:tint="@color/color_text_primary"/>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- DDI Alert Banner -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_ddi_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#FFE5E5"
+                app:strokeWidth="1dp"
+                app:strokeColor="#FF4B4B">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_dialog_alert"
+                        app:tint="#FF4B4B"
+                        android:layout_marginEnd="12dp"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_ddi_banner_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Interaction Warning"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#D32F2F"/>
+
+                        <TextView
+                            android:id="@+id/tv_ddi_banner_desc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1 High Severity Interaction Detected"
+                            android:textSize="12sp"
+                            android:textColor="#B71C1C"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="VIEW"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#D32F2F"
+                        android:padding="8dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Calendar Horizontal List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/calendarRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:clipToPadding="false"/>
+
+            <!-- Timeline Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Today's Schedule"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/color_text_primary"/>
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/color_surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/emptyScheduleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No reminders for this day"
+                            android:gravity="center"
+                            android:padding="24dp"
+                            android:textSize="13sp"
+                            android:textColor="@color/color_text_secondary"
+                            android:visibility="gone"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/scheduleRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            
+            <!-- Medication Collection Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Medical Cabinet"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_text_primary"
+                    android:layout_marginBottom="16dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/medicationRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginBottom="16dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_add_medication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Add Medicine"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:icon="@android:drawable/ic_input_add"
+        app:iconTint="#FFFFFF"
+        app:backgroundTint="@color/color_primary_orange"
+        app:elevation="6dp"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

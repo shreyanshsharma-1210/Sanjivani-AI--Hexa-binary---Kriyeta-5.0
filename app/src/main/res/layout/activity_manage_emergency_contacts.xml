@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_background">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="8dp"
+        android:background="@color/color_background">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_chevron_right"
+            android:rotation="180"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/color_text_primary"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Emergency Contacts"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_primary"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_contact_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0/5"
+            android:textSize="14sp"
+            android:textColor="@color/color_text_secondary"
+            android:layout_marginEnd="16dp"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_contacts"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingBottom="80dp"
+                android:clipToPadding="false"/>
+
+            <LinearLayout
+                android:id="@+id/ll_empty_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_nav_resume"
+                    app:tint="@color/color_text_secondary"
+                    android:alpha="0.3"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No contacts added yet"
+                    android:textColor="@color/color_text_secondary"
+                    android:layout_marginTop="16dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Fixed Add Button at Bottom -->
+        <Button
+            android:id="@+id/btn_add_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="16dp"
+            android:text="Add New Contact"
+            android:textAllCaps="false"
+            android:padding="16dp"
+            android:backgroundTint="@color/color_primary_orange"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:drawableStart="@android:drawable/ic_input_add"
+            android:drawablePadding="8dp"
+            android:gravity="center"/>
+
+    </FrameLayout>
+</LinearLayout>

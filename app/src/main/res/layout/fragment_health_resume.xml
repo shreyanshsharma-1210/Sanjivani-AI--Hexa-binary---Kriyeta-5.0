@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_background">
+
+    <!-- Top Navigation Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/color_background"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Health Resume"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_primary"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Medical Summary Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medical Summary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_secondary"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/color_surface"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:id="@+id/tv_resume_patient_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Patient Name"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_text_primary"/>
+
+                <TextView
+                    android:id="@+id/tv_resume_dob_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DOB: --  •  Gender: --"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_text_secondary"
+                    android:layout_marginTop="2dp"/>
+
+                <TextView
+                    android:id="@+id/tv_resume_blood_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Blood Group: --"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_emergency_red"
+                    android:layout_marginTop="2dp"
+                    android:textStyle="bold"/>
+                    
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#1A000000"
+                    android:layout_marginVertical="12dp"/>
+                    
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Emergency Contacts"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_text_secondary"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/tv_resume_contacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No emergency contacts found."
+                    android:textSize="14sp"
+                    android:textColor="@color/color_text_primary"
+                    android:layout_marginBottom="8dp"
+                    android:lineSpacingExtra="4dp"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#1A000000"
+                    android:layout_marginVertical="12dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Critical Conditions &amp; Medical History"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_text_secondary"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/tv_resume_conditions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No critical conditions reported."
+                    android:textSize="14sp"
+                    android:textColor="@color/color_text_primary"
+                    android:lineSpacingExtra="4dp"/>
+            </LinearLayout>
+
+            <!-- Document List Section -->
+            <TextView
+                android:id="@+id/tv_header_documents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Uploaded Health Records"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_secondary"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/ll_documents_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"/>
+
+            <!-- Document Upload Section -->
+            <LinearLayout
+                android:id="@+id/ll_empty_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingVertical="32dp">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_nav_resume"
+                    android:tint="@color/color_nav_inactive"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:id="@+id/tv_empty_records"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No documents uploaded yet"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_text_primary"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload medical reports for your records."
+                    android:textSize="13sp"
+                    android:textColor="@color/color_text_secondary"
+                    android:gravity="center"
+                    android:layout_marginBottom="24dp"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnUploadRecord"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Upload Health Record"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/color_primary_orange"
+                android:layout_marginBottom="12dp"/>
+
+            <Button
+                android:id="@+id/btnScanMedicine"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Scan Medicine"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/color_primary_orange"
+                android:layout_marginBottom="12dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

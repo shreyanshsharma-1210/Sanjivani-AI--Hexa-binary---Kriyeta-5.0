@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_medication_ocr.xml — Medication OCR Review Screen
+
+    States (controlled by state machine in MedicationOcrActivity):
+    ─── SCANNING   : progress spinner + status message
+    ─── REVIEW     : pre-filled editable fields + Approve / Discard buttons
+    ─── ERROR      : error icon + message + Retry button
+
+    Design language matches the existing project:
+    - Background: color_background (#F0F4F8)
+    - Cards: color_surface (#FFFFFF) with 16dp corner radius
+    - Primary action: color_primary_orange (#F26522)
+    - Typography: Roboto, matching existing screens
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_background">
+
+    <!-- ═══ Toolbar ══════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:background="@color/color_background">
+
+        <TextView
+            android:id="@+id/btn_ocr_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✕"
+            android:textSize="22sp"
+            android:textColor="@color/color_text_secondary"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/ocr_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_primary"
+            android:gravity="center"/>
+
+        <!-- Spacer — balances the ✕ icon -->
+        <View android:layout_width="40dp" android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- Thin divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_divider"/>
+
+    <!-- ═══ Content area with weight ═════════════════════════════════════════ -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- ── SCANNING state ─────────────────────────────────────────────── -->
+        <LinearLayout
+            android:id="@+id/layout_ocr_scanning"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp"
+            android:visibility="visible">
+
+            <ProgressBar
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/color_primary_orange"/>
+
+            <TextView
+                android:id="@+id/tv_ocr_scanning_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ocr_scanning"
+                android:textSize="16sp"
+                android:textColor="@color/color_text_primary"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ocr_scanning_note"
+                android:textSize="13sp"
+                android:textColor="@color/color_text_secondary"
+                android:gravity="center"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <!-- ── REVIEW state ───────────────────────────────────────────────── -->
+        <ScrollView
+            android:id="@+id/layout_ocr_review"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Warning / info banner -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/color_validation_banner_bg"
+                    android:layout_marginBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="14dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚠"
+                            android:textSize="20sp"
+                            android:textColor="@color/color_primary_orange"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/ocr_review_warning"
+                            android:textSize="13sp"
+                            android:textColor="@color/color_text_primary"
+                            android:paddingStart="10dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Medication Image Preview -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_ocr_image_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/color_divider"
+                    android:layout_marginBottom="16dp">
+                    
+                    <ImageView
+                        android:id="@+id/iv_ocr_image_preview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_nav_resume"
+                        android:alpha="0.8"/>
+                    
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#1A000000"/>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- OCR source badge -->
+                <TextView
+                    android:id="@+id/tv_ocr_source_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Source: ML Kit"
+                    android:textSize="11sp"
+                    android:textColor="@color/color_text_secondary"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginStart="4dp"/>
+
+                <!-- ── Editable fields card ───────────────────────────────── -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/color_surface"
+                    android:layout_marginBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ocr_extracted_fields"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/color_text_primary"
+                            android:letterSpacing="0.08"
+                            android:layout_marginBottom="16dp"/>
+
+                        <!-- Brand Name field -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Brand Name"
+                            android:textSize="12sp"
+                            android:textColor="@color/color_text_secondary"
+                            android:layout_marginBottom="4dp"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            app:boxCornerRadiusTopStart="10dp"
+                            app:boxCornerRadiusTopEnd="10dp"
+                            app:boxCornerRadiusBottomStart="10dp"
+                            app:boxCornerRadiusBottomEnd="10dp"
+                            app:boxStrokeColor="@color/color_divider">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_ocr_brand_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="e.g. HKVitals, Advil"
+                                android:textSize="15sp"
+                                android:textColor="@color/color_text_primary"
+                                android:inputType="textCapWords"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Drug Name field -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ocr_field_drug_name"
+                            android:textSize="12sp"
+                            android:textColor="@color/color_text_secondary"
+                            android:layout_marginBottom="4dp"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            app:boxCornerRadiusTopStart="10dp"
+                            app:boxCornerRadiusTopEnd="10dp"
+                            app:boxCornerRadiusBottomStart="10dp"
+                            app:boxCornerRadiusBottomEnd="10dp"
+                            app:boxStrokeColor="@color/color_divider">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_ocr_drug_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/ocr_hint_drug_name"
+                                android:textSize="15sp"
+                                android:textColor="@color/color_text_primary"
+                                android:inputType="textCapWords"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Dosage field -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ocr_field_dosage"
+                            android:textSize="12sp"
+                            android:textColor="@color/color_text_secondary"
+                            android:layout_marginBottom="4dp"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            app:boxCornerRadiusTopStart="10dp"
+                            app:boxCornerRadiusTopEnd="10dp"
+                            app:boxCornerRadiusBottomStart="10dp"
+                            app:boxCornerRadiusBottomEnd="10dp"
+                            app:boxStrokeColor="@color/color_divider">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_ocr_dosage"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/ocr_hint_dosage"
+                                android:textSize="15sp"
+                                android:textColor="@color/color_text_primary"
+                                android:inputType="text"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Expiry field -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ocr_field_expiry"
+                            android:textSize="12sp"
+                            android:textColor="@color/color_text_secondary"
+                            android:layout_marginBottom="4dp"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:boxCornerRadiusTopStart="10dp"
+                            app:boxCornerRadiusTopEnd="10dp"
+                            app:boxCornerRadiusBottomStart="10dp"
+                            app:boxCornerRadiusBottomEnd="10dp"
+                            app:boxStrokeColor="@color/color_divider">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_ocr_expiry"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/ocr_hint_expiry"
+                                android:textSize="15sp"
+                                android:textColor="@color/color_text_primary"
+                                android:inputType="text"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- DDI Interaction Container (Hidden until results arrive) -->
+                <LinearLayout
+                    android:id="@+id/layout_ddi_warnings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Drug Interactions Detected"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/color_emergency_red"
+                        android:letterSpacing="0.08"
+                        android:layout_marginBottom="8dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/ddi_cards_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"/>
+                    
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Disclaimer: This tool provides guidance, not medical advice. Always consult your doctor."
+                        android:textSize="11sp"
+                        android:textColor="@color/color_text_secondary"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <!-- Raw OCR text (collapsible, for transparency) -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/color_surface"
+                    android:layout_marginBottom="24dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tv_raw_ocr_toggle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ocr_raw_text_toggle"
+                            android:textSize="13sp"
+                            android:textColor="@color/color_primary_orange"
+                            android:textStyle="bold"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                        <TextView
+                            android:id="@+id/tv_raw_ocr_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="12sp"
+                            android:textColor="@color/color_text_secondary"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Disclaimer -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ocr_approve_disclaimer"
+                    android:textSize="12sp"
+                    android:textColor="@color/color_text_secondary"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- ── ERROR state ────────────────────────────────────────────────── -->
+        <LinearLayout
+            android:id="@+id/layout_ocr_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚠"
+                android:textSize="56sp"
+                android:textColor="@color/color_emergency_red"/>
+
+            <TextView
+                android:id="@+id/tv_ocr_error_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ocr_error_generic"
+                android:textSize="15sp"
+                android:textColor="@color/color_text_primary"
+                android:gravity="center"
+                android:layout_marginTop="12dp"/>
+
+            <Button
+                android:id="@+id/btn_ocr_retry"
+                android:layout_width="200dp"
+                android:layout_height="52dp"
+                android:text="@string/try_again"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/color_primary_orange"
+                android:layout_marginTop="24dp"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- ═══ Bottom action bar (visible only in REVIEW state) ═════════════════ -->
+    <LinearLayout
+        android:id="@+id/layout_ocr_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="@color/color_surface"
+        android:visibility="gone">
+
+        <!-- Discard / Cancel -->
+        <Button
+            android:id="@+id/btn_ocr_discard"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            android:text="@string/discard"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@color/color_text_secondary"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Approve & Save -->
+        <Button
+            android:id="@+id/btn_ocr_approve"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="2"
+            android:text="@string/ocr_approve_save"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/color_primary_orange"/>
+    </LinearLayout>
+
+</LinearLayout>

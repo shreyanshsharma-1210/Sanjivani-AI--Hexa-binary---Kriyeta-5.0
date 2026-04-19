@@ -1,0 +1,36 @@
+<svg width="100%" viewBox="0 0 680 420" role="img" xmlns="http://www.w3.org/2000/svg" style="">
+<title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Sanjivani logo</title>
+<desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Sanjivani logo — circular emblem with Sanskrit name and tagline on transparent background</desc>
+
+<defs>
+  <clipPath id="circle-clip">
+    <circle cx="340" cy="200" r="170"/>
+  </clipPath>
+</defs>
+
+<!-- Outer ring -->
+<circle cx="340" cy="200" r="174" fill="none" stroke="#1D9E75" stroke-width="2" opacity="0.3" style="fill:none;stroke:rgb(29, 158, 117);color:rgb(255, 255, 255);stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.3;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Main circle background — two-tone split -->
+<circle cx="340" cy="200" r="170" fill="#0A6E57" style="fill:rgb(10, 110, 87);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Lighter upper half accent -->
+<ellipse cx="340" cy="120" rx="170" ry="110" fill="#1D9E75" clip-path="url(#circle-clip)" style="fill:rgb(29, 158, 117);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Subtle inner ring -->
+<circle cx="340" cy="200" r="160" fill="none" stroke="#5DCAA5" stroke-width="0.8" opacity="0.4" style="fill:none;stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.8px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.4;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Sanskrit: संजीवनी — centered, large -->
+<text x="340" y="208" text-anchor="middle" dominant-baseline="central" font-family="'Noto Sans Devanagari', 'Arial Unicode MS', sans-serif" font-size="88" font-weight="700" fill="#ffffff" letter-spacing="-2" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Noto Sans Devanagari&quot;, &quot;Arial Unicode MS&quot;, sans-serif;font-size:88px;font-weight:700;text-anchor:middle;dominant-baseline:central">संजीवनी</text>
+
+<!-- Thin separator line -->
+<line x1="230" y1="268" x2="450" y2="268" stroke="#5DCAA5" stroke-width="1" opacity="0.7" style="fill:rgb(0, 0, 0);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.7;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Tagline: Personal Health OS -->
+<text x="340" y="292" text-anchor="middle" font-family="'Arial', sans-serif" font-size="16" font-weight="400" fill="#c8f0e0" letter-spacing="3" style="fill:rgb(200, 240, 224);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Arial, sans-serif;font-size:16px;font-weight:400;text-anchor:middle;dominant-baseline:auto">PERSONAL HEALTH OS</text>
+
+<!-- Small dot accents on separator -->
+<circle cx="225" cy="268" r="3" fill="#5DCAA5" opacity="0.7" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.7;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<circle cx="455" cy="268" r="3" fill="#5DCAA5" opacity="0.7" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.7;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+</svg>

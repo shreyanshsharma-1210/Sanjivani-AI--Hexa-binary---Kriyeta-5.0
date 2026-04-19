@@ -1,0 +1,24 @@
+[
+  {
+    "id": "REVITAL_MULTIVITAMIN",
+    "keywords": ["revital", "ginseng", "multivitamin"],
+    "threshold": 0.75,
+    "data": {
+      "brand_name": "REVITAL",
+      "drug_name": "MULTIVITAMIN",
+      "dosage": "Take 1 capsule daily after meal",
+      "expiry_date": "12/2027"
+    }
+  },
+  {
+    "id": "HK_VITALS_MULTIVITAMIN",
+    "keywords": ["hk vitals", "multivitamin", "zinc", "vitamin c"],
+    "threshold": 0.75,
+    "data": {
+      "brand_name": "HK VITALS",
+      "drug_name": "MULTIVITAMIN",
+      "dosage": "1 tablet daily (based on serving size)",
+      "expiry_date": "10/2027"
+    }
+  }
+]

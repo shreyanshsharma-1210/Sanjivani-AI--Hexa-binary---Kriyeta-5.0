@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SOS pulsing ring drawable — used in FallDetectionAlertActivity -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#33FF3B30"/>
+    <stroke
+        android:width="4dp"
+        android:color="#FF3B30"/>
+</shape>

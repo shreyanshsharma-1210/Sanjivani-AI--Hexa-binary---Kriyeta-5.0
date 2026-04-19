@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    DocumentUploadActivity layout — Phase 4 §15.5
+    Four states controlled by state machine:
+    - IDLE        : "+ Add Document" shown
+    - SELECTED    : thumbnail + file name + Upload button
+    - UPLOADING   : progress bar + status label
+    - ERROR       : error message + Retry button
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_background">
+
+    <!-- ═══ Toolbar ═══════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:background="@color/color_background">
+
+            <TextView
+                android:id="@+id/btn_cancel_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✕"
+                android:textSize="22sp"
+                android:textColor="@color/color_text_secondary"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Upload Document"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_primary"
+                android:gravity="center"/>
+
+            <!-- Spacer to balance the ✕ -->
+            <View android:layout_width="48dp" android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- ── IDLE state ────────────────────────────────────────── -->
+                <LinearLayout
+                    android:id="@+id/layout_idle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <!-- Dashed upload zone -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/color_surface"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <!-- Upload icon -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="⬆"
+                                android:textSize="40sp"
+                                android:textColor="@color/color_primary_orange"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tap to choose a document"
+                                android:textSize="15sp"
+                                android:textColor="@color/color_text_secondary"
+                                android:layout_marginTop="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PDF, JPEG, or PNG"
+                                android:textSize="12sp"
+                                android:textColor="@color/color_text_secondary"
+                                android:layout_marginTop="4dp"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <Button
+                        android:id="@+id/btn_pick_document"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:text="+ Add Document"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:backgroundTint="@color/color_primary_orange"/>
+
+                </LinearLayout>
+
+                <!-- ── SELECTED state ─────────────────────────────────────── -->
+                <LinearLayout
+                    android:id="@+id/layout_selected"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <!-- Document Preview Card -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:cardBackgroundColor="@color/color_surface"
+                        android:layout_marginBottom="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="16dp">
+
+                            <ImageView
+                                android:id="@+id/iv_doc_preview"
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:scaleType="centerCrop"
+                                android:background="@color/color_condition_chip_bg"
+                                android:visibility="gone"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingStart="12dp">
+
+                                <TextView
+                                    android:id="@+id/tv_doc_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="document.pdf"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/color_text_primary"
+                                    android:maxLines="2"
+                                    android:ellipsize="end"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Ready to upload"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/color_text_secondary"
+                                    android:layout_marginTop="4dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <Button
+                        android:id="@+id/btn_upload"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:text="@string/upload_analyse"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:backgroundTint="@color/color_primary_orange"/>
+
+                </LinearLayout>
+
+                <!-- ── UPLOADING state ─────────────────────────────────────── -->
+                <LinearLayout
+                    android:id="@+id/layout_uploading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="48dp"
+                    android:visibility="gone">
+
+                    <ProgressBar
+                        android:id="@+id/progress_upload"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:indeterminate="true"
+                        android:indeterminateTint="@color/color_primary_orange"/>
+
+                    <TextView
+                        android:id="@+id/tv_upload_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Uploading…"
+                        android:textSize="16sp"
+                        android:textColor="@color/color_text_primary"
+                        android:layout_marginTop="16dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AI extraction may take 10–30 seconds"
+                        android:textSize="13sp"
+                        android:textColor="@color/color_text_secondary"
+                        android:layout_marginTop="8dp"/>
+
+                </LinearLayout>
+
+                <!-- ── ERROR state ─────────────────────────────────────────── -->
+                <LinearLayout
+                    android:id="@+id/layout_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="48dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⚠"
+                        android:textSize="48sp"
+                        android:textColor="@color/color_emergency_red"/>
+
+                    <TextView
+                        android:id="@+id/tv_error_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Something went wrong."
+                        android:textSize="15sp"
+                        android:textColor="@color/color_text_primary"
+                        android:gravity="center"
+                        android:layout_marginTop="12dp"/>
+
+                    <Button
+                        android:id="@+id/btn_retry"
+                        android:layout_width="200dp"
+                        android:layout_height="52dp"
+                        android:text="Try Again"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:backgroundTint="@color/color_primary_orange"
+                        android:layout_marginTop="20dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</FrameLayout>

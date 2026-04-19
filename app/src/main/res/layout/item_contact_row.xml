@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    item_contact_row.xml — Phase 6 (§15.4)
+    Design: Name (left), Relationship Pill (centre), Green Call Button (right)
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="4dp"
+    android:background="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Contact Name -->
+        <TextView
+            android:id="@+id/tv_contact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_primary"/>
+
+        <!-- Relationship Pill -->
+        <TextView
+            android:id="@+id/tv_relationship_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Spouse"
+            android:textSize="11sp"
+            android:textColor="@color/color_primary_orange"
+            android:background="@color/color_relationship_pill_bg"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="3dp"
+            android:layout_marginTop="4dp"/>
+            
+    </LinearLayout>
+
+    <!-- Green Call Button -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_call_contact"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:cardCornerRadius="24dp"
+        app:cardBackgroundColor="@color/color_green_call"
+        app:cardElevation="2dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@android:drawable/ic_menu_call"
+            app:tint="@android:color/white"
+            android:contentDescription="Call Contact"/>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

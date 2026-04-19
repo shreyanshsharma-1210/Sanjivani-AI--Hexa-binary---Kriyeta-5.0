@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/color_background">
+
+    <!-- Progress Indicator -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Step 1 of 3: Basic Info"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/color_primary_orange"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Profile Photo Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="24dp">
+
+                <ImageView
+                    android:id="@+id/iv_profile_photo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@android:drawable/ic_menu_camera"
+                    android:background="@drawable/bg_condition_chip"
+                    android:padding="24dp"
+                    android:scaleType="centerCrop"/>
+                
+                <Button
+                    android:id="@+id/btn_upload_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload Photo"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/color_primary_orange"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full Name"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_primary"
+                android:layout_marginBottom="8dp"/>
+            <EditText
+                android:id="@+id/et_full_name"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_condition_chip"
+                android:paddingHorizontal="16dp"
+                android:hint="Jane Doe"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of Birth"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_primary"
+                android:layout_marginBottom="8dp"/>
+            <TextView
+                android:id="@+id/tv_dob"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_condition_chip"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"
+                android:hint="Select Date"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_primary"
+                android:layout_marginBottom="8dp"/>
+            <Spinner
+                android:id="@+id/spinner_gender"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_condition_chip"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blood Group (Immutable)"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_primary"
+                android:layout_marginBottom="8dp"/>
+            <Spinner
+                android:id="@+id/spinner_blood_group"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_condition_chip"
+                android:layout_marginBottom="24dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_next_step1"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Add emergency contacts"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/color_primary_orange"/>
+
+</LinearLayout>

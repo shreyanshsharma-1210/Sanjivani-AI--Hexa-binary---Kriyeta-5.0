@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App theme — light, no action bar (layouts define their own toolbars) -->
+    <style name="Theme.EmergencyPatient" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/color_primary_orange</item>
+        <item name="colorPrimaryDark">@color/color_text_primary</item>
+        <item name="colorAccent">@color/color_primary_orange</item>
+        <item name="android:windowBackground">@color/color_background</item>
+        <item name="android:statusBarColor">@color/color_background</item>
+        <item name="android:navigationBarColor">@color/color_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+
+
+    <!-- Countdown overlay — full red background, white text -->
+    <style name="Theme.EmergencyPatient.Countdown" parent="Theme.EmergencyPatient">
+        <item name="android:windowBackground">@color/color_emergency_red</item>
+        <item name="android:statusBarColor">@color/color_emergency_red</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="CircleAppearance">
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

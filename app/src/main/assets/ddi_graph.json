@@ -1,0 +1,35 @@
+{
+  "nodes": ["161", "11289", "5640", "1191", "29046", "723", "6851", "83367", "18631"],
+  "edges": [
+    {
+      "from": "161",
+      "to": "11289",
+      "severity": "HIGH",
+      "description": "Increased bleeding risk (Acetaminophen + Warfarin)"
+    },
+    {
+      "from": "5640",
+      "to": "1191",
+      "severity": "MODERATE",
+      "description": "Stomach irritation risk (Ibuprofen + Aspirin)"
+    },
+    {
+      "from": "5640",
+      "to": "29046",
+      "severity": "MODERATE",
+      "description": "May reduce the antihypertensive effect (Ibuprofen + Lisinopril)"
+    },
+    {
+      "from": "723",
+      "to": "6851",
+      "severity": "HIGH",
+      "description": "Increased methotrexate toxicity (Amoxicillin + Methotrexate)"
+    },
+    {
+      "from": "83367",
+      "to": "18631",
+      "severity": "MODERATE",
+      "description": "May increase risk of liver damage or myopathy (Atorvastatin + Azithromycin)"
+    }
+  ]
+}

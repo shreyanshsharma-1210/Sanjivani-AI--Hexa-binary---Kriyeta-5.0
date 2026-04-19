@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/color_background">
+
+    <!-- Progress Indicator -->
+    <TextView
+        android:id="@+id/tv_quiz_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Question 1 of 5"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/color_primary_orange"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_quiz_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Medical History"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/color_text_primary"
+        android:gravity="center"
+        android:layout_marginBottom="24dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_question_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Which category encompasses your most significant past medical diagnosis?"
+                android:textSize="18sp"
+                android:textColor="@color/color_text_primary"
+                android:layout_marginBottom="20dp"
+                android:lineSpacingExtra="4dp"/>
+
+            <RadioGroup
+                android:id="@+id/rg_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rb_option_a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Option A"
+                    android:paddingVertical="12dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/color_text_primary"
+                    android:layout_marginBottom="8dp"/>
+
+                <RadioButton
+                    android:id="@+id/rb_option_b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Option B"
+                    android:paddingVertical="12dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/color_text_primary"
+                    android:layout_marginBottom="8dp"/>
+
+                <RadioButton
+                    android:id="@+id/rb_option_c"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Option C"
+                    android:paddingVertical="12dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/color_text_primary"
+                    android:layout_marginBottom="8dp"/>
+
+                <RadioButton
+                    android:id="@+id/rb_option_d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Option D"
+                    android:paddingVertical="12dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/color_text_primary"
+                    android:layout_marginBottom="8dp"/>
+
+                <RadioButton
+                    android:id="@+id/rb_option_e"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Other"
+                    android:paddingVertical="12dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/color_text_primary"
+                    android:layout_marginBottom="8dp"/>
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/et_other_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Please specify..."
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_condition_chip"
+                android:padding="12dp"
+                android:layout_marginBottom="24dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btn_back_quiz"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            android:text="Back"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@color/color_text_secondary"/>
+
+        <Button
+            android:id="@+id/btn_next_quiz"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="2"
+            android:text="Next"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/color_primary_orange"/>
+    </LinearLayout>
+
+</LinearLayout>

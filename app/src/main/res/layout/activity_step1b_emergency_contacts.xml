@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Step 1b of 3"
+            android:textSize="14sp"
+            android:textColor="@color/color_text_secondary"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emergency Contacts"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_primary"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add up to 3 people we should notify in an emergency."
+            android:textSize="16sp"
+            android:textColor="@color/color_text_secondary"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- Contact 1 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact 1"
+            android:textStyle="bold"
+            android:textColor="@color/color_primary_orange"/>
+        
+        <EditText
+            android:id="@+id/et_contact1_name"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            android:background="@android:drawable/edit_text"
+            android:padding="16dp"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/et_contact1_phone"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:background="@android:drawable/edit_text"
+            android:padding="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Contact 2 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact 2 (Optional)"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_secondary"/>
+        
+        <EditText
+            android:id="@+id/et_contact2_name"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            android:background="@android:drawable/edit_text"
+            android:padding="16dp"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/et_contact2_phone"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:background="@android:drawable/edit_text"
+            android:padding="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Contact 3 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact 3 (Optional)"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_secondary"/>
+        
+        <EditText
+            android:id="@+id/et_contact3_name"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            android:background="@android:drawable/edit_text"
+            android:padding="16dp"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/et_contact3_phone"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:background="@android:drawable/edit_text"
+            android:padding="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"/>
+
+        <Button
+            android:id="@+id/btn_next_step1b"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="Let&#39;s get to know you"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/color_primary_orange"/>
+
+    </LinearLayout>
+</ScrollView>

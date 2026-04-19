@@ -1,0 +1,820 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_dashboard_warm">
+
+    <!-- Main scroll content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/homeScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="90dp"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- ═══════════════════════════════════════════════════
+                 HEADER — Teal gradient with skeuomorphic depth
+                 ═══════════════════════════════════════════════════ -->
+            <FrameLayout
+                android:id="@+id/headerSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_header_gradient"
+                android:paddingTop="48dp"
+                android:paddingBottom="32dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:alpha="0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Greeting row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Left: greeting + name -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvGreeting"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Good morning"
+                                android:textColor="#CCFFFFFF"
+                                android:textSize="13sp"
+                                android:letterSpacing="0.03" />
+
+                            <TextView
+                                android:id="@+id/tvUserName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Patient"
+                                android:textColor="#FFFFFF"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+
+                        <!-- Right: Luna shortcut (female-only, shown programmatically) + Avatar circle with online dot -->
+                        <FrameLayout
+                            android:id="@+id/lunaShortcutBtn"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/bg_luna_score_pill"
+                            android:visibility="gone"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:elevation="2dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="🌸"
+                                android:textSize="21sp"/>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/avatarContainer"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp">
+
+                            <!-- Avatar circle -->
+                            <FrameLayout
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:background="@drawable/bg_avatar_circle">
+
+                                <TextView
+                                    android:id="@+id/tvAvatarInitials"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="PA"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </FrameLayout>
+
+                            <!-- Online/notification dot -->
+                            <View
+                                android:id="@+id/notifDot"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_gravity="top|end"
+                                android:background="@drawable/dot_indicator" />
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <!-- Glass search bar -->
+                    <LinearLayout
+                        android:id="@+id/searchBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="18dp"
+                        android:background="@drawable/bg_search_bar"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@android:drawable/ic_menu_search"
+                            android:alpha="0.7"
+                            app:tint="#AAFFFFFF" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Search medications, reports..."
+                            android:textColor="#99FFFFFF"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- ═══════════════════════════════════════════════════
+                 DDI ALERT BANNER (hidden if no interactions)
+                 ═══════════════════════════════════════════════════ -->
+            <FrameLayout
+                android:id="@+id/ddiAlertSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:alpha="0"
+                android:translationY="28dp">
+
+                <!-- Section header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="⚠ Interaction Alerts"
+                            android:textColor="#1A1A2E"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvDdiSeeAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="See all"
+                            android:textColor="#1D9E75"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <!-- DDI Alert glowing card -->
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="4dp">
+
+                        <!-- Skeuomorphic shadow -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginStart="2dp"
+                            android:background="@drawable/bg_ddi_alert_card"
+                            android:alpha="0.3" />
+
+                        <!-- Alert card -->
+                        <LinearLayout
+                            android:id="@+id/cardDdiAlert"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_ddi_alert_card"
+                            android:orientation="horizontal"
+                            android:padding="14dp">
+
+                            <!-- Left red accent bar -->
+                            <View
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#A32D2D"
+                                android:layout_marginEnd="12dp" />
+
+                            <!-- Alert icon -->
+                            <FrameLayout
+                                android:id="@+id/ddiAlertIcon"
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                android:layout_marginEnd="12dp">
+                                <View
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:background="@drawable/bg_alert_icon_circle" />
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_gravity="center"
+                                    android:src="@android:drawable/ic_dialog_alert"
+                                    app:tint="#FFFFFF" />
+                            </FrameLayout>
+
+                            <!-- Alert text content -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="HIGH RISK INTERACTION"
+                                    android:textColor="#A32D2D"
+                                    android:textSize="9sp"
+                                    android:textStyle="bold"
+                                    android:letterSpacing="0.08" />
+
+                                <TextView
+                                    android:id="@+id/tvDdiDrugPair"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="Drug A + Drug B"
+                                    android:textColor="#501313"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tvDdiDescription"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="Risk description here"
+                                    android:textColor="#791F1F"
+                                    android:textSize="11sp" />
+
+                                <FrameLayout
+                                    android:id="@+id/btnDdiViewDetails"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:background="@drawable/bg_ddi_view_btn"
+                                    android:paddingStart="12dp"
+                                    android:paddingEnd="12dp"
+                                    android:paddingTop="5dp"
+                                    android:paddingBottom="5dp">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="View details →"
+                                        android:textColor="#A32D2D"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </FrameLayout>
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- ═══════════════════════════════════════════════════
+                 QUICK ACTIONS ROW
+                 ═══════════════════════════════════════════════════ -->
+            <LinearLayout
+                android:id="@+id/quickActionsSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:alpha="0"
+                android:translationY="28dp">
+
+                <!-- Section header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Quick Actions"
+                        android:textColor="#1A1A2E"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Two-column action buttons -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <!-- SCAN MEDICINE — Teal -->
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp">
+
+                        <!-- Skeuomorphic shadow -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/bg_teal_gradient"
+                            android:alpha="0.25" />
+
+                        <!-- Teal button -->
+                        <LinearLayout
+                            android:id="@+id/btnScanMedicine"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ripple_teal_card"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <!-- Icon container -->
+                            <FrameLayout
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/bg_icon_teal_box"
+                                android:layout_marginBottom="6dp">
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_gravity="center"
+                                    android:src="@android:drawable/ic_menu_camera"
+                                    app:tint="#FFFFFF" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Scan Medicine"
+                                android:textColor="#FFFFFF"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="OCR + auto detect"
+                                android:textColor="#BBFFFFFF"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <!-- UPLOAD REPORT — Purple glass -->
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp">
+
+                        <!-- Skeuomorphic shadow -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/bg_purple_glass"
+                            android:alpha="0.4" />
+
+                        <!-- Purple button -->
+                        <LinearLayout
+                            android:id="@+id/btnUploadReport"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ripple_purple_card"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <!-- Icon container -->
+                            <FrameLayout
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/bg_icon_purple_box"
+                                android:layout_marginBottom="6dp">
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_gravity="center"
+                                    android:src="@android:drawable/ic_menu_upload"
+                                    app:tint="#534AB7" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Upload Report"
+                                android:textColor="#3C3489"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PDF / image"
+                                android:textColor="#7B74CC"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- ═══════════════════════════════════════════════════
+                 DOSE ADHERENCE RING
+                 ═══════════════════════════════════════════════════ -->
+            <LinearLayout
+                android:id="@+id/adherenceSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:alpha="0"
+                android:translationY="28dp">
+
+                <!-- Section header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="This Week"
+                        android:textColor="#1A1A2E"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Adherence card -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <!-- Skeuomorphic shadow -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="2dp"
+                        android:background="@drawable/bg_med_card"
+                        android:alpha="0.4" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_med_card"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
+
+                        <!-- Left: stats -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Dose Adherence"
+                                android:textColor="#888780"
+                                android:textSize="10sp" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="10dp">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:gravity="center_horizontal"
+                                    android:layout_marginEnd="16dp">
+
+                                    <TextView
+                                        android:id="@+id/tvTakenCount"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0"
+                                        android:textColor="#1D9E75"
+                                        android:textSize="22sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Taken"
+                                        android:textColor="#888780"
+                                        android:textSize="9sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:gravity="center_horizontal">
+
+                                    <TextView
+                                        android:id="@+id/tvPendingCount"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0"
+                                        android:textColor="#BA7517"
+                                        android:textSize="22sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Pending"
+                                        android:textColor="#888780"
+                                        android:textSize="9sp" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- Right: Adherence ring (custom DrawView) -->
+                        <com.emergency.patient.activities.AdherenceRingView
+                            android:id="@+id/adherenceRing"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp" />
+                    </LinearLayout>
+                </FrameLayout>
+            </LinearLayout>
+
+            <!-- ═══════════════════════════════════════════════════
+                 ACTIVE MEDICATIONS (Horizontal scroll)
+                 ═══════════════════════════════════════════════════ -->
+            <LinearLayout
+                android:id="@+id/medicationsSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:alpha="0"
+                android:translationY="28dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Active Medications"
+                        android:textColor="#1A1A2E"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvMedSeeAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See all"
+                        android:textColor="#1D9E75"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/homeMedicationsRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            </LinearLayout>
+
+            <!-- ═══════════════════════════════════════════════════
+                 TODAY'S SCHEDULE
+                 ═══════════════════════════════════════════════════ -->
+            <LinearLayout
+                android:id="@+id/scheduleSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:alpha="0"
+                android:translationY="28dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Today's Schedule"
+                        android:textColor="#1A1A2E"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvScheduleSeeAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See all"
+                        android:textColor="#1D9E75"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/homeScheduleRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <TextView
+                    android:id="@+id/tvScheduleEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="✓ No medications scheduled for today"
+                    android:textColor="#888780"
+                    android:textSize="13sp"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- ═══════════════════════════════════════════════════
+                 AI INSIGHT CARD
+                 ═══════════════════════════════════════════════════ -->
+            <LinearLayout
+                android:id="@+id/aiInsightSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"
+                android:alpha="0"
+                android:translationY="28dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="AI Insight"
+                        android:textColor="#1A1A2E"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <!-- Skeuomorphic purple shadow -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/bg_ai_card"
+                        android:alpha="0.45" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_ai_card"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
+
+                        <!-- AI icon -->
+                        <FrameLayout
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:background="@drawable/bg_ai_icon_box"
+                            android:layout_marginEnd="12dp">
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_lightbulb"
+                                app:tint="#FFFFFF" />
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="AI INSIGHT"
+                                android:textColor="#534AB7"
+                                android:textSize="9sp"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.08" />
+
+                            <TextView
+                                android:id="@+id/tvAiInsight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:text="Tap a medication in your cabinet to get AI-powered insights about its usage, interactions, and key safety tips."
+                                android:textColor="#3C3489"
+                                android:textSize="12sp"
+                                android:lineSpacingMultiplier="1.4" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </FrameLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- ═══════════════════════════════════════════════════
+         FAB — Animated scan button
+         ═══════════════════════════════════════════════════ -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/homeFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_qr_scanner"
+        android:contentDescription="Scan medication"
+        app:backgroundTint="#1D9E75"
+        app:tint="#FFFFFF"
+        app:elevation="8dp"
+        app:borderWidth="0dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

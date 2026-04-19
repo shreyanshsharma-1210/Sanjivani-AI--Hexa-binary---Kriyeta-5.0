@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_background">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:background="@color/color_background">
+
+        <ImageButton
+            android:id="@+id/btn_close_edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:tint="@color/color_text_primary"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Edit Profile"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_primary"
+            android:layout_marginStart="16dp"/>
+
+        <Button
+            android:id="@+id/btn_save_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@color/color_primary_orange"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="24dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_edit_avatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_blank_profile"
+                android:scaleType="centerCrop"
+                android:background="@color/color_condition_chip_bg"
+                app:shapeAppearanceOverlay="@style/CircleAppearance"/>
+
+            <TextView
+                android:id="@+id/btn_change_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Change Photo"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_primary_orange"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackground"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full Name"
+                android:textSize="12sp"
+                android:textColor="@color/color_text_secondary"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/et_edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="Full Name"
+                android:inputType="textPersonName"
+                android:background="@android:drawable/edit_text"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of Birth"
+                android:textSize="12sp"
+                android:textColor="@color/color_text_secondary"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_edit_dob"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="Select DOB"
+                android:gravity="center_vertical"
+                android:background="@android:drawable/edit_text"
+                android:padding="16dp"
+                android:textColor="@color/color_text_primary"
+                android:layout_marginBottom="24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textSize="12sp"
+                android:textColor="@color/color_text_secondary"
+                android:layout_marginBottom="8dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_edit_gender"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:layout_marginBottom="32dp"/>
+
+            <!-- Immutable Section -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#1A000000"
+                android:layout_marginBottom="24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blood Group (Immutable)"
+                android:textSize="12sp"
+                android:textColor="@color/color_emergency_red"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_edit_blood_group"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:background="@android:color/transparent"
+                android:padding="16dp"
+                android:text="--"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_secondary"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="For medical safety, your blood group can only be set during initial onboarding."
+                android:textSize="12sp"
+                android:textColor="@color/color_text_secondary"
+                android:layout_marginTop="4dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

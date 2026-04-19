@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Lock Screen (Screen 1) — Section 15.2
+    View IDs match LockScreenActivity.bindViews() after user refactor.
+    Background: #F5F5F7 — near-white warm grey, full bleed.
+    Layout flow (top→bottom): patient name → SOS cross (pulse) → TAP label → clock → date
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F7">
+
+    <!-- ═══ Idle State ═══════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/idle_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Spacer: ~28% from top -->
+        <Space android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+
+        <!-- Patient first name -->
+        <TextView
+            android:id="@+id/tv_lock_patient_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Patient"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:textColor="#1A2B3C"
+            android:layout_marginBottom="12dp"/>
+
+        <!--
+            SOS Container — FrameLayout is the clickable pulse target.
+            Contains glow halo + medical cross stacked.
+        -->
+        <FrameLayout
+            android:id="@+id/fl_sos_container"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <!-- Glow halo — soft light-red circle -->
+            <View
+                android:id="@+id/v_sos_glow"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:background="@drawable/bg_sos_glow"
+                android:layout_gravity="center"/>
+
+            <!-- Medical cross (coral-red) -->
+            <ImageView
+                android:id="@+id/iv_sos_cross"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/ic_sos_cross"
+                android:layout_gravity="center"
+                android:contentDescription="SOS Cross"/>
+        </FrameLayout>
+
+        <!-- TAP IN EMERGENCY label — also tappable -->
+        <TextView
+            android:id="@+id/tv_sos_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TAP IN EMERGENCY"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#E8574A"
+            android:letterSpacing="0.15"
+            android:layout_marginTop="16dp"/>
+
+        <Space android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+
+        <!-- Live clock — Roboto Light 64sp -->
+        <TextView
+            android:id="@+id/tv_lock_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--:--"
+            android:textSize="64sp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#1A2B3C"/>
+
+        <!-- Live date — EEEE, MMMM d -->
+        <TextView
+            android:id="@+id/tv_lock_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="---"
+            android:textSize="17sp"
+            android:textColor="#8A96A3"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="48dp"/>
+
+    </LinearLayout>
+
+    <!-- ═══ Countdown Overlay ════════════════════════════════════════════════ -->
+    <!-- Shown over entire screen during active SOS countdown -->
+    <FrameLayout
+        android:id="@+id/fl_countdown_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E84B4B"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Status label (e.g. "Fetching location…") -->
+            <TextView
+                android:id="@+id/tv_countdown_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sending emergency in"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"/>
+
+            <!-- Large countdown number — 10 → 0 -->
+            <TextView
+                android:id="@+id/tv_countdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textSize="120sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginVertical="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="seconds"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"/>
+
+            <!-- CANCEL — dark navy, 80dp tall, always visible -->
+            <Button
+                android:id="@+id/btn_cancel_countdown"
+                android:layout_width="240dp"
+                android:layout_height="80dp"
+                android:text="CANCEL"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#E84B4B"
+                android:backgroundTint="#1A2B3C"
+                android:layout_marginTop="40dp"/>
+
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>

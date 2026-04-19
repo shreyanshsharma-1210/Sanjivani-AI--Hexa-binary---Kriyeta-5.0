@@ -1,0 +1,26 @@
+[
+  {
+    "id": "HK_VITALS_MULTIVITAMIN",
+    "match_keywords": ["HK VITALS", "MULTIVITAMIN", "ZINC", "VITAMIN C", "GINSENG"],
+    "brand_name": "HK VITALS",
+    "drug_name": "MULTIVITAMIN",
+    "dosage_hint": "1 tablet daily",
+    "confidence_boost": 40
+  },
+  {
+    "id": "REVITAL_WOMEN",
+    "match_keywords": ["REVITAL", "WOMEN", "GINSENG", "MULTIVITAMIN", "VITAMINS"],
+    "brand_name": "REVITAL",
+    "drug_name": "MULTIVITAMIN",
+    "dosage_hint": "1 capsule daily",
+    "confidence_boost": 40
+  },
+  {
+      "id": "DOLO_650",
+      "match_keywords": ["DOLO", "650", "PARACETAMOL"],
+      "brand_name": "MICRO LABS",
+      "drug_name": "DOLO 650",
+      "dosage_hint": "1 tablet as needed",
+      "confidence_boost": 30
+  }
+]

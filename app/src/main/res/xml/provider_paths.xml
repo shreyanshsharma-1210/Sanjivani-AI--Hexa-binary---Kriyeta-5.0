@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Expose internal storage files (e.g., from context.getFilesDir()) -->
+    <files-path name="internal_files" path="." />
+    <!-- Expose cache storage files (e.g., from context.getCacheDir()) -->
+    <cache-path name="cache_files" path="." />
+</paths>

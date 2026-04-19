@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="1dp"
+    app:cardBackgroundColor="@color/color_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+        <!-- Top Colored Border based on severity -->
+        <View
+            android:id="@+id/view_severity_bar"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/color_emergency_red"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="top">
+
+            <TextView
+                android:id="@+id/tv_ddi_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚠"
+                android:textSize="18sp"
+                android:layout_marginEnd="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_ddi_drugs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Drug A + Drug B"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_text_primary"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/tv_ddi_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description of interaction goes here."
+                    android:textSize="12sp"
+                    android:textColor="@color/color_text_secondary"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,9 @@
+// Top-level build file. Plugin management is done via settings.gradle.
+plugins {
+    id 'com.android.application' version '8.2.2' apply false
+    id 'com.google.gms.google-services' version '4.3.15' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

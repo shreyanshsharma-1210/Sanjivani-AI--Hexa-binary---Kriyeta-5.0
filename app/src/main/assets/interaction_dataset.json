@@ -1,0 +1,30 @@
+{
+  "paracetamol": {
+    "warfarin": {
+      "severity": "HIGH",
+      "description": "Increased risk of bleeding"
+    }
+  },
+  "ibuprofen": {
+    "aspirin": {
+      "severity": "MEDIUM",
+      "description": "Stomach irritation risk"
+    },
+    "lisinopril": {
+      "severity": "MEDIUM",
+      "description": "May reduce the antihypertensive effect of lisinopril"
+    }
+  },
+  "amoxicillin": {
+    "methotrexate": {
+      "severity": "HIGH",
+      "description": "Increased methotrexate toxicity"
+    }
+  },
+  "atorvastatin": {
+    "azithromycin": {
+      "severity": "MEDIUM",
+      "description": "May increase risk of liver damage or myopathy"
+    }
+  }
+}

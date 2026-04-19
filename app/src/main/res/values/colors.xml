@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Screen/page background (cool off-white) -->
+    <color name="color_background">#F0F4F8</color>
+    <!-- Cards and panels -->
+    <color name="color_surface">#FFFFFF</color>
+    <!-- Primary branding: orange -->
+    <color name="color_primary_orange">#F26522</color>
+    <!-- Emergency accent: red -->
+    <color name="color_emergency_red">#E84B4B</color>
+    <!-- Emergency Activated banner background -->
+    <color name="color_emergency_banner_bg">#FDEAEA</color>
+    <!-- Call buttons and success states -->
+    <color name="color_green_call">#2DB55D</color>
+    <!-- OCR / validation success indicator -->
+    <color name="color_success_green">#2DB55D</color>
+    
+    <!-- Typography tokens -->
+    <color name="color_text_primary">#1A2B3C</color>
+    <color name="color_text_secondary">#8A96A3</color>
+    
+    <!-- UI Element backgrounds -->
+    <color name="color_condition_chip_bg">#FEF0EC</color>
+    <color name="color_doctor_badge_bg">#FFF3E0</color>
+    <color name="color_nav_inactive">#B0BAC5</color>
+    <color name="color_divider">#E8ECF0</color>
+    <color name="color_qr_bg_teal">#4DBDAD</color>
+    <!-- Validation screen warning banner background (warm amber tint) -->
+    <color name="color_validation_banner_bg">#FFF8EC</color>
+    <!-- Contact row relationship pill background (soft blue tint) -->
+    <color name="color_relationship_pill_bg">#EDF3FF</color>
+    
+    <!-- Secondary actions -->
+    <color name="color_secondary_orange">#FF8F5E</color>
+</resources>

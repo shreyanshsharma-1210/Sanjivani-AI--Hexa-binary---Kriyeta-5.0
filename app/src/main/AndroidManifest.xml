@@ -1,0 +1,227 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-sdk tools:overrideLibrary="com.google.ai.edge.aicore" />
+
+    <!-- ═══ Permissions ═══════════════════════════════════════════════════════ -->
+
+    <!-- Core emergency: SMS fallback and GPS fix -->
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <!-- Battery: keep foreground service alive -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <!-- Android 14+: must explicitly state foreground service type -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
+    <!-- Fall Detection: Health service type for sensor-based monitoring -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH"/>
+    <!-- Activity Recognition: Gate sensor frequency by user motion state -->
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    <!-- Body Sensors: Extra compliance for Health FGS type on some Android 14 flavors -->
+    <uses-permission android:name="android.permission.BODY_SENSORS"/>
+    <!-- High Sampling Rate: Required for Android 12+ sensor accuracy and FGS Health type -->
+    <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"/>
+    <!-- Wake Lock: Keep CPU alive during screen-off to prevent sensor gaps -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!-- Network -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+
+    <!-- CALL ALL button in EmergencyActiveActivity -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <!-- Android 13+: Push notification display permission -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <!-- Vibration and Full-screen alerts -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+
+    <!-- Document picker preview (for images on older Android) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"
+        android:maxSdkVersion="32"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"/>
+
+    <!-- ═══ Application ════════════════════════════════════════════════════════ -->
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/sanjivani_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/sanjivani_logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.EmergencyPatient"
+        android:usesCleartextTraffic="true">
+
+
+        <!-- ── Activities ──────────────────────────────────────────────────── -->
+
+        <!-- Entry point: Progressive Onboarding Funnel -> Dashboard -->
+        <activity
+            android:name=".activities.Step1BasicInfoActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.Step1bEmergencyContactsActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".activities.Step2MedicalHistoryActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".activities.Step3VerifyResumeActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".activities.EditProfileActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".activities.ManageEmergencyContactsActivity"
+            android:exported="false"/>
+
+        <!-- The main app dashboard (formerly MainActivity) -->
+        <activity
+            android:name=".activities.DashboardActivity"
+            android:exported="false"/>
+
+        <!-- Medical ID &amp; SOS launcher — appears above keyguard via notification tap -->
+        <activity
+            android:name=".activities.QuickAccessActivity"
+            android:showOnLockScreen="true"
+            android:turnScreenOn="true"
+            android:excludeFromRecents="true"
+            android:exported="false"/>
+
+        <!-- Post-SOS active emergency dashboard -->
+        <activity
+            android:name=".activities.EmergencyActiveActivity"
+            android:showOnLockScreen="true"
+            android:turnScreenOn="true"
+            android:screenOrientation="portrait"
+            android:exported="false"/>
+
+        <!-- AI document upload flow -->
+        <activity
+            android:name=".activities.DocumentUploadActivity"
+            android:exported="false"/>
+
+        <!-- Human validation of AI-extracted data -->
+        <activity
+            android:name=".activities.ValidationActivity"
+            android:exported="false"/>
+
+        <!-- Medication Label OCR Review Screen -->
+        <activity
+            android:name=".activities.MedicationOcrActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.EmergencyPatient"
+            android:exported="false"/>
+
+        <!-- Medication Confirmation / Schedule Preview -->
+        <activity
+            android:name=".activities.MedicationConfirmationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.EmergencyPatient"
+            android:exported="false"/>
+
+        <!-- Fall Detection Alert — shown over lockscreen when fall is confirmed -->
+        <activity
+            android:name=".activities.FallDetectionAlertActivity"
+            android:showOnLockScreen="true"
+            android:turnScreenOn="true"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true"
+            android:exported="false"/>
+
+        <!-- ── Services ────────────────────────────────────────────────────── -->
+
+        <!-- Persistent foreground service — listens for screen-off events -->
+        <service
+            android:name=".services.EmergencyBackgroundService"
+            android:foregroundServiceType="specialUse"
+            android:exported="false">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                      android:value="Provides quick access to Medical ID and SOS from the lockscreen." />
+        </service>
+
+        <!-- Fall Detection Service — independent safety-critical sensor engine -->
+        <service
+            android:name=".services.FallDetectionService"
+            android:foregroundServiceType="health"
+            android:exported="false"
+            android:stopWithTask="false"/>
+
+        <!-- FCM push notification handler -->
+        <service
+            android:name=".services.AppFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".services.PdfExtractionService"
+            android:exported="false" />
+
+        <!-- ── Broadcast Receivers ─────────────────────────────────────────── -->
+
+        <!-- Restarts EmergencyBackgroundService after device reboot -->
+        <receiver
+            android:name=".services.BootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".services.NotificationDismissReceiver"
+            android:exported="false"/>
+            
+        <receiver
+            android:name=".scheduling.ActionReceiver"
+            android:exported="false"/>
+
+        <!-- ── File Providers ─────────────────────────────────────────────── -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <!-- ── Metadata ───────────────────────────────────────────────────── -->
+
+        <!-- Google Maps API Key (set in local.properties as MAPS_API_KEY) -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}"/>
+
+        <!-- Firebase sender ID (configured via google-services.json) -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="emergency_extraction_channel"/>
+
+    </application>
+
+</manifest>

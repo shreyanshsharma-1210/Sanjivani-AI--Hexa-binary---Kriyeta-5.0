@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/color_background">
+
+    <!-- Progress Indicator -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Step 3 of 3: Verification"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/color_primary_orange"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Draft Health Resume"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/color_text_primary"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please review your core medical inputs. These will be encoded into your emergency QR code."
+        android:textSize="14sp"
+        android:textColor="@color/color_text_secondary"
+        android:layout_marginBottom="24dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color_surface"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Demographics"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_primary"
+                android:layout_marginBottom="8dp"/>
+            
+            <TextView
+                android:id="@+id/tv_verify_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text_secondary"
+                android:layout_marginBottom="4dp"/>
+            
+            <TextView
+                android:id="@+id/tv_verify_gender_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text_secondary"
+                android:layout_marginBottom="4dp"/>
+            
+            <TextView
+                android:id="@+id/tv_verify_blood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_primary_orange"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_background"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medical History"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_primary"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_verify_conditions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text_secondary"
+                android:layout_marginBottom="16dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_background"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
+                android:id="@+id/layout_ocr_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Extracted Medication"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_text_primary"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/tv_ocr_name_verify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_text_secondary"/>
+                
+                <TextView
+                    android:id="@+id/tv_ocr_dosage_verify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_text_secondary"/>
+                
+                <TextView
+                    android:id="@+id/tv_ocr_expiry_verify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_text_secondary"
+                    android:layout_marginBottom="16dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_background"
+                    android:layout_marginBottom="16dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emergency Contacts"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_primary"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_verify_contacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text_secondary"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btn_back_step3"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            android:text="Back"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@color/color_text_secondary"/>
+
+        <Button
+            android:id="@+id/btn_verify_create"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="2"
+            android:text="Verify &amp; Create Profile"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/color_primary_orange"/>
+    </LinearLayout>
+
+</LinearLayout>
