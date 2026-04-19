@@ -29,6 +29,10 @@
 
 <br/><br/>
 
+### 📲 [Download the Android APK](https://drive.google.com/drive/folders/1aQRriRogzi8NDrx72G5AA88EqBPO-Wjx)
+
+<br/>
+
 <p>
 <a href="#-the-problem">Problem</a> ·
 <a href="#-the-solution">Solution</a> ·
